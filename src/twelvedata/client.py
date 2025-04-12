@@ -8,6 +8,7 @@ from .endpoints import (
     IndicesListEndpoint,
     FundsListEndpoint,
     BondsListEndpoint,
+    CommoditiesListEndpoint,
     ExchangesListEndpoint,
     CryptocurrenciesListEndpoint,
     CryptocurrencyExchangesListEndpoint,
@@ -136,7 +137,6 @@ class TDClient:
         Creates request builder for ETF List
 
         This API call return array of ETFs available at Twelve Data API. This list is daily updated.
-        This list is daily updated.
 
         :returns: request builder instance
         :rtype: ETFListRequestBuilder
@@ -150,7 +150,6 @@ class TDClient:
         Creates request builder for Indices List
 
         This API call return array of indices available at Twelve Data API. This list is daily updated.
-        This list is daily updated.
 
         :returns: request builder instance
         :rtype: IndicesListRequestBuilder
@@ -164,7 +163,6 @@ class TDClient:
         Creates request builder for Funds List
 
         This API call return array of funds available at Twelve Data API. This list is daily updated.
-        This list is daily updated.
 
         :returns: request builder instance
         :rtype: FundsListRequestBuilder
@@ -178,7 +176,6 @@ class TDClient:
         Creates request builder for Bonds List
 
         This API call return array of bonds available at Twelve Data API. This list is daily updated.
-        This list is daily updated.
 
         :returns: request builder instance
         :rtype: BondsListRequestBuilder
@@ -186,6 +183,19 @@ class TDClient:
         ctx = Context.from_context(self.ctx)
         ctx.defaults.update(defaults)
         return BondsListEndpoint(ctx, **ctx.defaults)
+    
+    def get_commodities_list(self, **defaults):
+        """
+        Creates request builder for Commodities List
+
+        This API call return array of commodities available at Twelve Data API. This list is daily updated.
+
+        :returns: request builder instance
+        :rtype: CommoditiesListRequestBuilder
+        """
+        ctx = Context.from_context(self.ctx)
+        ctx.defaults.update(defaults)
+        return CommoditiesListEndpoint(ctx, **ctx.defaults)
 
     def get_exchanges_list(self, **defaults):
         """

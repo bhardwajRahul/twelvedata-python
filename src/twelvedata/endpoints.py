@@ -21,6 +21,7 @@ __all__ = (
     "CEILEndpoint",
     "CMOEndpoint",
     "COPPOCKEndpoint",
+    "CommoditiesListEndpoint",
     "CryptocurrenciesListEndpoint",
     "CryptocurrencyExchangesListEndpoint",
     "CurrencyConversionEndpoint",
@@ -912,6 +913,34 @@ class BondsListEndpoint(AsMixin, Endpoint):
         params["format"] = format
         params["apikey"] = self.ctx.apikey
         endpoint = "/bonds"
+
+        if debug:
+            return build_url(self.ctx.base_url, endpoint, params)
+        return self.ctx.http_client.get(endpoint, params=params)
+
+class CommoditiesListEndpoint(AsMixin, Endpoint):
+    _name = "commodities"
+
+    def __init__(self,
+                 ctx,
+                 symbol=None,
+                 category=None,
+    ):
+        self.ctx = ctx
+        self.symbol = symbol
+        self.category = category
+
+    def execute(self, format="JSON", debug=False):
+
+        params = {}
+        if self.symbol is not None:
+            params["symbol"] = self.symbol
+        if self.category is not None:
+            params["category"] = self.category
+
+        params["format"] = format
+        params["apikey"] = self.ctx.apikey
+        endpoint = "/commodities"
 
         if debug:
             return build_url(self.ctx.base_url, endpoint, params)
